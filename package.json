@@ -1,0 +1,27 @@
+{
+  "name": "severlesssalah",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "npm run clean && tsc && copyfiles --up 1 \"src/**/*.json\" dist && copyfiles package.json npm.lock dist",
+    "clean": "npm install --frozen-lockfile && rimraf dist",
+    "start": "npm run build && cd dist && func host start",
+    "test": "jest --testRegex \"\\.test\\.ts$\"",
+    "test-save-results": "cross-env JEST_JUNIT_OUTPUT=test-results/test-results-local.xml jest --ci --runInBand --reporters=default --reporters=jest-junit --testRegex \"\\.test\\.ts$\"",
+    "test-e2e": "jest --testRegex \"\\.e2e-test\\.ts$\"",
+    "test-e2e-save-results": "cross-env JEST_JUNIT_OUTPUT=test-results/test-results-e2e.xml jest --ci --runInBand --reporters=default --reporters=jest-junit --testRegex \"\\.e2e-test\\.ts$\""
+  },
+  "dependencies": {
+    "salahtimes": "^1.1.11"
+  },
+  "devDependencies": {
+    "@azure/functions": "^1.2.2",
+    "@fluffy-spoon/substitute": "^1.145.0",
+    "@types/jest": "^26.0.9",
+    "copyfiles": "^2.3.0",
+    "jest": "^26.2.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.4",
+    "typescript": "^3.9.7"
+  }
+}

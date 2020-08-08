@@ -1,6 +1,7 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions'
 import { getDhuhrDateTimeUtc } from 'salahtimes'
 import { parseIso8601Date } from '../date'
+import { errorHandler } from '../errorHandler'
 
 type Response = {
   status: number
@@ -14,6 +15,7 @@ const dhuhr: AzureFunction = async function (
 ): Promise<Response> {
   try {
     const date = parseIso8601Date(req.params.date)
+
     return {
       status: 200,
       body: getDhuhrDateTimeUtc(date, -0.174943),
@@ -21,15 +23,17 @@ const dhuhr: AzureFunction = async function (
         'Content-Type': 'application/json',
       },
     }
-  } catch {
-    const today = new Date(Date.now()).toISOString().split('T')[0]
-    return {
-      status: 400,
-      body: `Please provide a date value in the ISO 8601 format. ISO 8601 Date format is yyyy-MM-dd, heres an example: api/dhuhr/date/${today}/...`,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
+  } catch (e) {
+    const handledError = errorHandler(e)
+    return handledError
+      ? handledError.response
+      : {
+          status: 500,
+          body: `Unexpected Error`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
   }
 }
 

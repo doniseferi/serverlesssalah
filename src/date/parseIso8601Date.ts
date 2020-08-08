@@ -3,7 +3,7 @@ const parseIso8601Date = (isoDate: string): Date => {
   const dateFromParams = isoDate.match(iso8601DateRegex)
 
   if (!dateFromParams) {
-    throw new Error('Date Not ISO 8601 Format.')
+    throw new Error('DateNotISO8601Format')
   }
 
   const year = parseInt(dateFromParams[1])

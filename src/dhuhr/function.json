@@ -6,9 +6,7 @@
       "direction": "in",
       "name": "req",
       "route": "dhuhr/date/{date}/longitude/{longitude}",
-      "methods": [
-        "get"   
-      ]
+      "methods": ["get"]
     },
     {
       "type": "http",

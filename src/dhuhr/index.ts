@@ -2,23 +2,27 @@ import { AzureFunction, Context, HttpRequest } from '@azure/functions'
 import { getDhuhrDateTimeUtc } from 'salahtimes'
 import { parseIso8601Date } from '../date'
 import { errorHandler } from '../errorHandler'
+import { getLongitudeValue } from '../geoCoordinates'
+import { SalahResponse } from './response'
+//todo: move to own file
 
-type Response = {
-  status: number
-  body: string
-  headers: { 'Content-Type': string }
-}
+// type Response = {
+//   status: number
+//   body: string
+//   headers: { [key: string]: string }
+// }
 
 const dhuhr: AzureFunction = async function (
   context: Context,
   req: HttpRequest,
-): Promise<Response> {
+): Promise<SalahResponse> {
   try {
     const date = parseIso8601Date(req.params.date)
+    const longitude = getLongitudeValue(req.params.longitude)
 
     return {
       status: 200,
-      body: getDhuhrDateTimeUtc(date, -0.174943),
+      body: getDhuhrDateTimeUtc(date, longitude),
       headers: {
         'Content-Type': 'application/json',
       },

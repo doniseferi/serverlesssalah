@@ -26,6 +26,18 @@
       "command": "npm prune --production",
       "dependsOn": "npm build",
       "problemMatcher": []
+    },
+    {
+      "label": "startFunctionsHost",
+      "type": "npm",
+      "script": "start",
+      "problemMatcher": "$func-watch",
+      "isBackground": true,
+      "options": {
+        "env": {
+          "languageWorkers__node__arguments": "--inspect=9229"
+        }
+      }
     }
   ]
 }

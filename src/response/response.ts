@@ -1,10 +1,33 @@
 type SalahResponse = {
   headers: { [key: string]: string }
   status: number
-  body?: string
+  body: Salah | Error
 }
 
-const ok = (body: string): SalahResponse =>
+type Salah = {
+  salah: string
+  value: string
+}
+
+type Error = {
+  message: string
+  field: string
+}
+
+const salah = (name: string, value: string): Salah =>
+  !name
+    ? (function () {
+        throw new ReferenceError()
+      })()
+    : !value
+    ? (function () {
+        throw new ReferenceError()
+      })()
+    : { salah: name, value }
+
+const error = (message: string, field: string): Error => ({ message, field })
+
+const ok = (body: Salah): SalahResponse =>
   !body
     ? unexpectedServerError()
     : {
@@ -15,15 +38,15 @@ const ok = (body: string): SalahResponse =>
         body: body,
       }
 
-const badRequest = (message: string): SalahResponse =>
-  !message
+const badRequest = (error: Error): SalahResponse =>
+  !error
     ? unexpectedServerError()
     : {
         headers: {
           'Content-Type': 'application/json',
         },
         status: 400,
-        body: message,
+        body: error,
       }
 
 const unexpectedServerError = (): SalahResponse => ({
@@ -31,6 +54,16 @@ const unexpectedServerError = (): SalahResponse => ({
     'Content-Type': 'application/json',
   },
   status: 500,
+  body: error('An unexpected error has occured. Please try again.', null),
 })
 
-export { SalahResponse, ok, badRequest, unexpectedServerError }
+export {
+  SalahResponse,
+  Salah,
+  Error,
+  salah,
+  error,
+  ok,
+  badRequest,
+  unexpectedServerError,
+}

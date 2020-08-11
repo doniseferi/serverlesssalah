@@ -1,7 +1,20 @@
 import {
   SalahResponse,
+  Salah,
+  Error,
+  salah,
+  error,
   ok,
   badRequest,
   unexpectedServerError,
 } from './response'
-export { SalahResponse, ok, badRequest, unexpectedServerError }
+export {
+  SalahResponse,
+  Salah,
+  Error,
+  salah,
+  error,
+  ok,
+  badRequest,
+  unexpectedServerError,
+}

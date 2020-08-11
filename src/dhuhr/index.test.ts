@@ -2,6 +2,7 @@ import { Context } from '@azure/functions'
 import { HttpRequest } from '@azure/functions'
 import { Substitute } from '@fluffy-spoon/substitute'
 import dhuhr from './index'
+import { SalahResponse, Salah } from '../response'
 
 describe('dhuhr function', () => {
   test.each([
@@ -81,8 +82,10 @@ describe('dhuhr function', () => {
       const context = Substitute.for<Context>()
       ;(context.req as any).returns({ req: request })
 
-      const response = await dhuhr(context, request)
-
-      expect(response.body).toBe('2025-01-18T12:10:20.853Z')
+      const response: SalahResponse = await dhuhr(context, request)
+      const data = response.body as Salah
+      expect(data).not.toBe(null)
+      expect(data.salah).toBe('dhuhr')
+      expect(data.value).toBe('2025-01-18T12:10:20.853Z')
     })
 })

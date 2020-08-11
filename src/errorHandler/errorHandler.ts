@@ -19,7 +19,7 @@ const handlers = [
     name: 'InvalidLongitudeValue',
     response: badRequest(
       error(
-        `Please provide a longitude value within a range of -180 to 180.the ISO 8601 format. Heres an example: api/dhuhr/date/${
+        `Please provide a longitude value within a range of -180 to 180. Heres an example: api/dhuhr/date/${
           new Date(Date.now()).toISOString().split('T')[0]
         }/longitude/-0.174943`,
         'longitude',

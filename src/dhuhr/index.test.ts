@@ -3,6 +3,7 @@ import { HttpRequest } from '@azure/functions'
 import { Substitute } from '@fluffy-spoon/substitute'
 import dhuhr from './index'
 import { SalahResponse, Salah } from '../response'
+import { SalahError } from '../errors'
 
 describe('dhuhr function', () => {
   test.each([
@@ -87,5 +88,20 @@ describe('dhuhr function', () => {
       expect(data).not.toBe(null)
       expect(data.salah).toBe('dhuhr')
       expect(data.value).toBe('2025-01-18T12:10:20.853Z')
+    }),
+    test('Returns a valid error response on consecutive error calls', async () => {
+      const request = Substitute.for<HttpRequest>()
+      ;(request.params.returns as any)({
+        date: '2025-01-18',
+        longitude: -400.01015,
+      })
+
+      const context = Substitute.for<Context>()
+      ;(context.req as any).returns({ req: request })
+
+      expect((await dhuhr(context, request)).body as SalahError).not.toBe(null)
+      expect((await dhuhr(context, request)).body as SalahError).toBe(
+        (await dhuhr(context, request)).body as SalahError,
+      )
     })
 })

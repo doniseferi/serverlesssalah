@@ -1,7 +1,9 @@
+import { SalahError, salahError } from '../errors'
+
 type SalahResponse = {
   headers: { [key: string]: string }
   status: number
-  body: Salah | Error
+  body: Salah | SalahError
 }
 
 type Salah = {
@@ -9,23 +11,16 @@ type Salah = {
   value: string
 }
 
-type Error = {
-  message: string
-  field: string
-}
-
 const salah = (name: string, value: string): Salah =>
   !name
     ? (function () {
-        throw new ReferenceError()
+        throw new ReferenceError('name is null, undefined or an emmpty string')
       })()
     : !value
     ? (function () {
-        throw new ReferenceError()
+        throw new ReferenceError('name is null, undefined or an emmpty string')
       })()
     : { salah: name, value }
-
-const error = (message: string, field: string): Error => ({ message, field })
 
 const ok = (body: Salah): SalahResponse =>
   !body
@@ -38,7 +33,7 @@ const ok = (body: Salah): SalahResponse =>
         body: body,
       }
 
-const badRequest = (error: Error): SalahResponse =>
+const badRequest = (error: SalahError): SalahResponse =>
   !error
     ? unexpectedServerError()
     : {
@@ -54,16 +49,10 @@ const unexpectedServerError = (): SalahResponse => ({
     'Content-Type': 'application/json',
   },
   status: 500,
-  body: error('An unexpected error has occured. Please try again.', null),
+  body: salahError(
+    'An unexpected error has occured. Please try again.',
+    '__none__',
+  ),
 })
 
-export {
-  SalahResponse,
-  Salah,
-  Error,
-  salah,
-  error,
-  ok,
-  badRequest,
-  unexpectedServerError,
-}
+export { SalahResponse, Salah, salah, ok, badRequest, unexpectedServerError }

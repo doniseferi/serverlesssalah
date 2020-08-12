@@ -1,9 +1,15 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions'
 import { getDhuhrDateTimeUtc } from 'salahtimes'
 import { parseIso8601Date } from '../date'
-import { errorHandler } from '../errorHandler'
+import { errorHandler } from '../errors'
 import { getLongitudeValue } from '../geoCoordinates'
-import { SalahResponse, ok, unexpectedServerError, salah } from '../response'
+import {
+  SalahResponse,
+  ok,
+  unexpectedServerError,
+  salah,
+  badRequest,
+} from '../response'
 
 const dhuhr: AzureFunction = async function (
   context: Context,
@@ -14,8 +20,8 @@ const dhuhr: AzureFunction = async function (
     const longitude = getLongitudeValue(req.params.longitude)
     return ok(salah('dhuhr', getDhuhrDateTimeUtc(date, longitude)))
   } catch (e) {
-    const handledError = errorHandler(e)
-    return handledError ? handledError : unexpectedServerError()
+    const expectedError = errorHandler(e)
+    return expectedError ? badRequest(expectedError) : unexpectedServerError()
   }
 }
 

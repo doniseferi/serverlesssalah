@@ -1,15 +1,15 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions'
 import { getDhuhrDateTimeUtc } from 'salahtimes'
-import { parseIso8601Date } from '../date'
-import { errorHandler } from '../errors'
-import { getLongitudeValue } from '../geoCoordinates'
+import { parseIso8601Date } from '../../date'
+import { errorHandler } from '../../errors'
+import { getLongitudeValue } from '../../geoCoordinates'
 import {
   SalahResponse,
   ok,
   unexpectedServerError,
   salah,
   badRequest,
-} from '../response'
+} from '../../response'
 
 const dhuhr: AzureFunction = async function (
   context: Context,

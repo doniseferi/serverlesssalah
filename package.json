@@ -7,7 +7,7 @@
     "pretty": "prettier --config .prettierrc.json --write \"src/**/*.{js,ts,json,md}\"",
     "build": "npm run clean && tsc && copyfiles --up 1 \"src/**/*.json\" dist && copyfiles package.json npm.lock dist",
     "clean": "npm install --frozen-lockfile && rimraf dist",
-    "start": "npm run build && cd dist && func host start",
+    "start": "npm run build && cd dist\\functions && func host start",
     "test": "jest --testRegex \"\\.test\\.ts$\"",
     "test-save-results": "cross-env JEST_JUNIT_OUTPUT=test-results/test-results-local.xml jest --ci --runInBand --reporters=default --reporters=jest-junit --testRegex \"\\.test\\.ts$\""
   },

@@ -60,7 +60,7 @@ describe('maghrib function', () => {
       [null, 400],
       ['', 400],
     ])(
-      `requires a longitude value passed in the path`,
+      `requires a longitude value passed into the path`,
       async (longitude, statusCode) => {
         const request = Substitute.for<HttpRequest>()
         ;(request.params.returns as any)({
@@ -75,6 +75,8 @@ describe('maghrib function', () => {
         })
 
         const response = await maghrib(context, request)
+
+        const response2 = await maghrib(context, request)
 
         expect(response.status).toBe(statusCode)
       },
@@ -97,7 +99,7 @@ describe('maghrib function', () => {
       [null, 400],
       ['', 400],
     ])(
-      `requires a latitude value passed in the path`,
+      `requires a latitude value passed into the path`,
       async (latitude, statusCode) => {
         const request = Substitute.for<HttpRequest>()
         ;(request.params.returns as any)({
@@ -111,6 +113,12 @@ describe('maghrib function', () => {
         ;(context.req as any).returns({ req: request })
 
         const response = await maghrib(context, request)
+
+        if (response.status === 500) {
+          let x = ' '
+        }
+
+        await maghrib(context, request)
 
         expect(response.status).toBe(statusCode)
       },

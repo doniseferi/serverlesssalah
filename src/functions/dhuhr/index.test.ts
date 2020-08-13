@@ -56,7 +56,7 @@ describe('dhuhr function', () => {
       [null, 400],
       ['', 400],
     ])(
-      `requires a longitude value passed in the path`,
+      `requires a longitude value passed into the path`,
       async (longitude, statusCode) => {
         const request = Substitute.for<HttpRequest>()
         ;(request.params.returns as any)({

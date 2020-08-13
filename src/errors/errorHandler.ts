@@ -22,6 +22,15 @@ const handlers = [
       'longitude',
     ),
   },
+  {
+    name: 'InvalidLatitudeValue',
+    error: salahError(
+      `Please provide a longitude value within a range of -90 to 90. Heres an example path: /api/maghrib/date/${
+        new Date(Date.now()).toISOString().split('T')[0]
+      }/latitude/51.522079/longitude/-0.174943`,
+      'latitude',
+    ),
+  },
 ]
 
 export { errorHandler }

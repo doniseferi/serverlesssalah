@@ -1,2 +1,2 @@
-import { getLongitudeValue } from './getLongitudeValue'
-export { getLongitudeValue }
+import { getLongitudeValue, getLatitudeValue } from './getLongitudeValue'
+export { getLongitudeValue, getLatitudeValue }

@@ -12,7 +12,7 @@
     "test-save-results": "cross-env JEST_JUNIT_OUTPUT=test-results/test-results-local.xml jest --ci --runInBand --reporters=default --reporters=jest-junit --testRegex \"\\.test\\.ts$\""
   },
   "dependencies": {
-    "salahtimes": "^1.1.11"
+    "salahtimes": "^1.1.14"
   },
   "devDependencies": {
     "@azure/functions": "^1.2.2",

@@ -1,11 +1,11 @@
 import { Context } from '@azure/functions'
 import { HttpRequest } from '@azure/functions'
 import { Substitute } from '@fluffy-spoon/substitute'
-import dhuhr from './index'
+import maghrib from './index'
 import { SalahResponse, Salah } from '../../response'
 import { SalahError } from '../../errors'
 
-describe('dhuhr function', () => {
+describe('maghrib function', () => {
   test.each([
     ['2020-06-08', 200],
     ['20200608', 200],
@@ -28,13 +28,17 @@ describe('dhuhr function', () => {
     [null, 400],
   ])(`requires an iso 8601 date in the path`, async (date, statusCode) => {
     const request = Substitute.for<HttpRequest>()
-    ;(request.params.returns as any)({ date: date, longitude: '0' })
+    ;(request.params.returns as any)({
+      date,
+      latitude: 0,
+      longitude: 0,
+    })
     ;(request.body.returns as any)({})
 
     const context = Substitute.for<Context>()
     ;(context.req as any).returns({ req: request })
 
-    const response = await dhuhr(context, request)
+    const response = await maghrib(context, request)
 
     expect(response.status).toBe(statusCode)
   }),
@@ -61,14 +65,52 @@ describe('dhuhr function', () => {
         const request = Substitute.for<HttpRequest>()
         ;(request.params.returns as any)({
           date: '2020-01-01',
+          latitude: 0,
           longitude,
+        })
+        ;(request.body.returns as any)({})
+        const context = Substitute.for<Context>()
+        ;(context.req as any).returns({
+          req: request,
+        })
+
+        const response = await maghrib(context, request)
+
+        expect(response.status).toBe(statusCode)
+      },
+    ),
+    test.each([
+      ['-90', 200],
+      ['90', 200],
+      ['-89', 200],
+      ['89', 200],
+      ['-0', 200],
+      ['0', 200],
+      ['1', 200],
+      ['-1', 200],
+      ['-90.01', 400],
+      ['90.01', 400],
+      ['999', 400],
+      ['-999', 400],
+      ['buzzlightyear', 400],
+      ['sherrifwoody', 400],
+      [null, 400],
+      ['', 400],
+    ])(
+      `requires a latitude value passed in the path`,
+      async (latitude, statusCode) => {
+        const request = Substitute.for<HttpRequest>()
+        ;(request.params.returns as any)({
+          date: '2020-01-01',
+          latitude,
+          longitude: 0,
         })
         ;(request.body.returns as any)({})
 
         const context = Substitute.for<Context>()
         ;(context.req as any).returns({ req: request })
 
-        const response = await dhuhr(context, request)
+        const response = await maghrib(context, request)
 
         expect(response.status).toBe(statusCode)
       },
@@ -76,32 +118,37 @@ describe('dhuhr function', () => {
     test('Returns a date time in iso 8601 format string in the body', async () => {
       const request = Substitute.for<HttpRequest>()
       ;(request.params.returns as any)({
-        date: '2025-01-18',
-        longitude: -0.01015,
+        date: '2037-08-02',
+        latitude: '42.637610',
+        longitude: '21.09216',
+      })
+      const context = Substitute.for<Context>()
+      ;(context.req as any).returns({
+        req: request,
       })
 
-      const context = Substitute.for<Context>()
-      ;(context.req as any).returns({ req: request })
-
-      const response: SalahResponse = await dhuhr(context, request)
+      const response: SalahResponse = await maghrib(context, request)
       const data = response.body as Salah
       expect(data).not.toBe(null)
-      expect(data.salah).toBe('dhuhr')
-      expect(data.value).toBe('2025-01-18T12:10:20.853Z')
+      expect(data.salah).toBe('maghrib')
+      expect(data.value).toBe('2037-08-02T17:59:44.318Z')
     }),
     test('Returns a valid error response on consecutive error calls', async () => {
       const request = Substitute.for<HttpRequest>()
       ;(request.params.returns as any)({
-        date: '2025-01-18',
+        date: '20201-18',
+        latitude: 900,
         longitude: -400.01015,
       })
 
       const context = Substitute.for<Context>()
       ;(context.req as any).returns({ req: request })
 
-      expect((await dhuhr(context, request)).body as SalahError).not.toBe(null)
-      expect((await dhuhr(context, request)).body as SalahError).toBe(
-        (await dhuhr(context, request)).body as SalahError,
+      expect((await maghrib(context, request)).body as SalahError).not.toBe(
+        null,
+      )
+      expect((await maghrib(context, request)).body as SalahError).toBe(
+        (await maghrib(context, request)).body as SalahError,
       )
     })
 })

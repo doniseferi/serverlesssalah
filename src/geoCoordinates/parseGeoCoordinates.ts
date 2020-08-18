@@ -3,18 +3,18 @@ type CoordinateConstraints = {
   max: number
 }
 
-const getLatitudeValue = (latitude: string): number => {
+const parseLatitude = (latitude: string): number => {
   try {
     return parseCoordinate(latitude, latitudeConstrains)
-  } catch (e) {
+  } catch {
     throw new Error('InvalidLatitudeValue')
   }
 }
 
-const getLongitudeValue = (longitude: string): number => {
+const parseLongitude = (longitude: string): number => {
   try {
     return parseCoordinate(longitude, longitudeConstrains)
-  } catch (e) {
+  } catch {
     throw new Error('InvalidLongitudeValue')
   }
 }
@@ -51,4 +51,4 @@ const hasMetConstraints = (
   constraints: CoordinateConstraints,
 ): boolean => value >= constraints.min && value <= constraints.max
 
-export { getLongitudeValue, getLatitudeValue }
+export { parseLongitude, parseLatitude }

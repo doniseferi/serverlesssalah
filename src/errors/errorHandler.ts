@@ -5,6 +5,20 @@ const errorHandler = (error: Error): SalahError =>
 
 const handlers = [
   {
+    name: 'NoSupportedConventionError',
+    error: salahError(
+      `Please provide one of the follow values: "MuslimWorldLeague", "IslamicSocietyOfNorthAmerica", "EgyptianGeneralAuthorityOfSurvey", "UmmAlQuraUniversityMekkah", "UniversityOfIslamicSciencesKarachi", "InstituteOfGeophysicsUniversityOfTehranOfSurvey", "ShiaIthnaAshariLevaResearchInstituteQumOfSurvey" or do not provide the convention query string as it is not manditory. Heres an example: /api/fajr/date/2021-02-15/latitude/51.522079/longitude/-0.191380?convention=islamicsocietyofnorthamerica&highLatitudeMethod=oneseventhmethod"`,
+      'convention',
+    ),
+  },
+  {
+    name: 'NotSupportedHighLatitudeMethodError',
+    error: salahError(
+      `Please provide one of the follow values: "AngleBasedMethod", "MiddleOfTheNightMethod", "OneSeventhMethod" or do not provide the highlatitudeMethod query string as it is not manditory. Heres an example: /api/fajr/date/2021-02-15/latitude/51.522079/longitude/-0.191380?convention=islamicsocietyofnorthamerica&highLatitudeMethod=oneseventhmethod"`,
+      'highLatitudeMethod',
+    ),
+  },
+  {
     name: 'DateNotISO8601Format',
     error: salahError(
       `Please provide a date value in the ISO 8601 format. ISO 8601 Date format is yyyy-MM-dd, heres an example path: /api/dhuhr/date/${

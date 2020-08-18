@@ -1,2 +1,2 @@
-import { getLongitudeValue, getLatitudeValue } from './geoCoordinates'
-export { getLongitudeValue, getLatitudeValue }
+import { parseLongitude, parseLatitude } from './parseGeoCoordinates'
+export { parseLongitude, parseLatitude }

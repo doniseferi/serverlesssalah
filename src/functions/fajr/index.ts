@@ -1,8 +1,14 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions'
-import { getMaghribDateTimeUtc } from 'salahtimes'
+import {
+  getFajrDateTimeUtc,
+  SupportedConventions,
+  HighLatitudeMethod,
+} from 'salahtimes'
+import { parseConvention } from '../../convention'
 import { parseIso8601Date } from '../../date'
 import { errorHandler } from '../../errors'
 import { parseLongitude, parseLatitude } from '../../geoCoordinates'
+import { parseHighLatitudeMethod } from '../../highLatitudeMethod'
 import {
   SalahResponse,
   ok,
@@ -11,7 +17,7 @@ import {
   badRequest,
 } from '../../response'
 
-const maghrib: AzureFunction = async function (
+const fajr: AzureFunction = async function (
   context: Context,
   req: HttpRequest,
 ): Promise<SalahResponse> {
@@ -19,8 +25,21 @@ const maghrib: AzureFunction = async function (
     const date = parseIso8601Date(req.params.date)
     const latitude = parseLatitude(req.params.latitude)
     const longitude = parseLongitude(req.params.longitude)
+    const convetion = parseConvention(req.query.convention)
+    const highLatitudeMethod = parseHighLatitudeMethod(
+      req.query.highLatitudeMethod,
+    )
     return ok(
-      salah('maghrib', getMaghribDateTimeUtc(date, latitude, longitude)),
+      salah(
+        'fajr',
+        getFajrDateTimeUtc(
+          date,
+          latitude,
+          longitude,
+          convetion,
+          highLatitudeMethod,
+        ),
+      ),
     )
   } catch (e) {
     const expectedError = errorHandler(e)
@@ -28,4 +47,4 @@ const maghrib: AzureFunction = async function (
   }
 }
 
-export default maghrib
+export default fajr

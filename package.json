@@ -1,16 +1,22 @@
 {
   "name": "severlesssalah",
   "version": "1.0.0",
-  "description": "",
+  "description": "A serverless http triggered application to get the exact date and time in an ISO 8601 format for any of the five daily prayers at any location and date.",
   "scripts": {
     "lint": "eslint . --ext .ts --fix",
     "pretty": "prettier --config .prettierrc.json --write \"src/**/*.{js,ts,json,md}\"",
     "build": "npm run clean && tsc && copyfiles --up 1 \"src/**/*.json\" dist && copyfiles package.json npm.lock dist",
     "clean": "npm install --frozen-lockfile && rimraf dist",
-    "start": "npm run build && cd dist\\functions && func host start",
+    "start": "npm run build && cd ./dist/functions && func host start",
     "test": "jest --testRegex \"\\.test\\.ts$\"",
     "test-save-results": "cross-env JEST_JUNIT_OUTPUT=test-results/test-results-local.xml jest --ci --runInBand --reporters=default --reporters=jest-junit --testRegex \"\\.test\\.ts$\""
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/doniseferi/serverlesssalah.git"
+  },
+  "author": "Edonis Seferi",
+  "license": "ISC",
   "dependencies": {
     "salahtimes": "^1.1.15"
   },

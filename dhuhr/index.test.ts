@@ -2,8 +2,8 @@ import { Context } from '@azure/functions'
 import { HttpRequest } from '@azure/functions'
 import { Substitute } from '@fluffy-spoon/substitute'
 import dhuhr from './index'
-import { SalahResponse, Salah } from '../../response'
-import { SalahError } from '../../errors'
+import { SalahResponse, Salah } from '../response'
+import { SalahError } from '../errors'
 
 describe('dhuhr function', () => {
   test.each([

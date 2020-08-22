@@ -4,18 +4,18 @@ import {
   SupportedConventions,
   HighLatitudeMethod,
 } from 'salahtimes'
-import { parseConvention } from '../../convention'
-import { parseIso8601Date } from '../../date'
-import { errorHandler } from '../../errors'
-import { parseLongitude, parseLatitude } from '../../geoCoordinates'
-import { parseHighLatitudeMethod } from '../../highLatitudeMethod'
+import { parseConvention } from '../convention'
+import { parseIso8601Date } from '../date'
+import { errorHandler } from '../errors'
+import { parseLongitude, parseLatitude } from '../geoCoordinates'
+import { parseHighLatitudeMethod } from '../highLatitudeMethod'
 import {
   SalahResponse,
   ok,
   unexpectedServerError,
   salah,
   badRequest,
-} from '../../response'
+} from '../response'
 
 const fajr: AzureFunction = async function (
   context: Context,

@@ -5,7 +5,7 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "route": "maghrib/date/{date}/latitude/{latitude}/longitude/{longitude}",
+      "route": "dhuhr/date/{date}/longitude/{longitude}",
       "methods": [
         "get"
       ]
@@ -16,5 +16,5 @@
       "name": "$return"
     }
   ],
-  "scriptFile": "index.js"
+  "scriptFile": "../dist/dhuhr/index.js"
 }

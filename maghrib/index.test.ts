@@ -1,11 +1,11 @@
 import { Context } from '@azure/functions'
 import { HttpRequest } from '@azure/functions'
 import { Substitute } from '@fluffy-spoon/substitute'
-import fajr from './index'
-import { SalahResponse, Salah } from '../../response'
-import { SalahError } from '../../errors'
+import maghrib from './index'
+import { SalahResponse, Salah } from '../response'
+import { SalahError } from '../errors'
 
-describe('fajr function', () => {
+describe('maghrib function', () => {
   test.each([
     ['2020-06-08', 200],
     ['20200608', 200],
@@ -34,12 +34,11 @@ describe('fajr function', () => {
       longitude: 0,
     })
     ;(request.body.returns as any)({})
-    ;(request.query.returns as any)({})
 
     const context = Substitute.for<Context>()
     ;(context.req as any).returns({ req: request })
 
-    const response = await fajr(context, request)
+    const response = await maghrib(context, request)
 
     expect(response.status).toBe(statusCode)
   }),
@@ -70,13 +69,12 @@ describe('fajr function', () => {
           longitude,
         })
         ;(request.body.returns as any)({})
-        ;(request.query.returns as any)({})
         const context = Substitute.for<Context>()
         ;(context.req as any).returns({
           req: request,
         })
 
-        const response = await fajr(context, request)
+        const response = await maghrib(context, request)
 
         expect(response.status).toBe(statusCode)
       },
@@ -108,14 +106,13 @@ describe('fajr function', () => {
           longitude: 0,
         })
         ;(request.body.returns as any)({})
-        ;(request.query.returns as any)({})
 
         const context = Substitute.for<Context>()
         ;(context.req as any).returns({ req: request })
 
-        const response = await fajr(context, request)
+        const response = await maghrib(context, request)
 
-        await fajr(context, request)
+        await maghrib(context, request)
 
         expect(response.status).toBe(statusCode)
       },
@@ -127,17 +124,16 @@ describe('fajr function', () => {
         latitude: '42.637610',
         longitude: '21.09216',
       })
-      ;(request.query.returns as any)({})
       const context = Substitute.for<Context>()
       ;(context.req as any).returns({
         req: request,
       })
 
-      const response: SalahResponse = await fajr(context, request)
+      const response: SalahResponse = await maghrib(context, request)
       const data = response.body as Salah
       expect(data).not.toBe(null)
-      expect(data.salah).toBe('fajr')
-      expect(data.value).toBe('2037-08-02T01:30:30.499Z')
+      expect(data.salah).toBe('maghrib')
+      expect(data.value).toBe('2037-08-02T17:59:44.318Z')
     }),
     test('Returns a valid error response on consecutive error calls', async () => {
       const request = Substitute.for<HttpRequest>()
@@ -146,79 +142,15 @@ describe('fajr function', () => {
         latitude: 900,
         longitude: -400.01015,
       })
-      ;(request.query.returns as any)({})
 
       const context = Substitute.for<Context>()
       ;(context.req as any).returns({ req: request })
 
-      expect((await fajr(context, request)).body as SalahError).not.toBe(null)
-      expect((await fajr(context, request)).body as SalahError).toBe(
-        (await fajr(context, request)).body as SalahError,
+      expect((await maghrib(context, request)).body as SalahError).not.toBe(
+        null,
       )
-    }),
-    test.each([
-      ['MuslimWorldLeague', 200],
-      ['IslamicSocietyOfNorthAmerica', 200],
-      ['EgyptianGeneralAuthorityOfSurvey', 200],
-      ['UmmAlQuraUniversityMekkah', 200],
-      ['UniversityOfIslamicSciencesKarachi', 200],
-      ['InstituteOfGeophysicsUniversityOfTehranOfSurvey', 200],
-      ['ShiaIthnaAshariLevaResearchInstituteQumOfSurvey', 200],
-      ['abc', 400],
-      [null, 200],
-      [undefined, 200],
-    ])(
-      `accepts an islamic convention query string in the path`,
-      async (convention, statusCode: number) => {
-        const request = Substitute.for<HttpRequest>()
-        ;(request.params.returns as any)({
-          date: '2037-08-02',
-          latitude: 0,
-          longitude: 0,
-        })
-        ;(request.query.returns as any)({
-          convention: convention,
-          highLatitudeMethod: 'oneseventhmethod',
-        })
-        ;(request.body.returns as any)({})
-
-        const context = Substitute.for<Context>()
-        ;(context.req as any).returns({ req: request })
-
-        const response = await fajr(context, request)
-
-        expect(response.status).toBe(statusCode)
-        expect(response.status).toBe(statusCode)
-      },
-    ),
-    test.each([
-      ['AngleBasedMethod', 200],
-      ['abc', 400],
-      ['MiddleOfTheNightMethod', 200],
-      ['OneSeventhMethod', 200],
-      [null, 200],
-      [undefined, 200],
-    ])(
-      `accepts a high latitude method query string in the path`,
-      async (highLatitudeMethod, statusCode: number) => {
-        const request = Substitute.for<HttpRequest>()
-        ;(request.params.returns as any)({
-          date: '2037-08-02',
-          latitude: 0,
-          longitude: 0,
-        })
-        ;(request.query.returns as any)({
-          convention: 'muslimworldleague',
-          highLatitudeMethod: highLatitudeMethod,
-        })
-        ;(request.body.returns as any)({})
-
-        const context = Substitute.for<Context>()
-        ;(context.req as any).returns({ req: request })
-
-        const response = await fajr(context, request)
-
-        expect(response.status).toBe(statusCode)
-      },
-    )
+      expect((await maghrib(context, request)).body as SalahError).toBe(
+        (await maghrib(context, request)).body as SalahError,
+      )
+    })
 })

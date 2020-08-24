@@ -133,7 +133,7 @@ describe('maghrib function', () => {
       const data = response.body as Salah
       expect(data).not.toBe(null)
       expect(data.salah).toBe('maghrib')
-      expect(data.value).toBe('2037-08-02T17:59:44.318Z')
+      expect(data.utc).toBe('2037-08-02T17:59:44.318Z')
     }),
     test('Returns a valid error response on consecutive error calls', async () => {
       const request = Substitute.for<HttpRequest>()

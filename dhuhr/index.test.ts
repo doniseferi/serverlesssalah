@@ -87,7 +87,7 @@ describe('dhuhr function', () => {
       const data = response.body as Salah
       expect(data).not.toBe(null)
       expect(data.salah).toBe('dhuhr')
-      expect(data.value).toBe('2025-01-18T12:10:20.853Z')
+      expect(data.utc).toBe('2025-01-18T12:10:20.853Z')
     }),
     test('Returns a valid error response on consecutive error calls', async () => {
       const request = Substitute.for<HttpRequest>()

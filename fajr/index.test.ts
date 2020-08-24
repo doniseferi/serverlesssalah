@@ -137,7 +137,7 @@ describe('fajr function', () => {
       const data = response.body as Salah
       expect(data).not.toBe(null)
       expect(data.salah).toBe('fajr')
-      expect(data.value).toBe('2037-08-02T01:30:30.499Z')
+      expect(data.utc).toBe('2037-08-02T01:30:30.499Z')
     }),
     test('Returns a valid error response on consecutive error calls', async () => {
       const request = Substitute.for<HttpRequest>()

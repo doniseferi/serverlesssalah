@@ -8,7 +8,7 @@ type SalahResponse = {
 
 type Salah = {
   salah: string
-  value: string
+  utc: string
 }
 
 const salah = (name: string, value: string): Salah =>
@@ -20,7 +20,7 @@ const salah = (name: string, value: string): Salah =>
     ? (function () {
         throw new ReferenceError('name is null, undefined or an emmpty string')
       })()
-    : { salah: name, value }
+    : { salah: name, utc: value }
 
 const ok = (body: Salah): SalahResponse =>
   !body

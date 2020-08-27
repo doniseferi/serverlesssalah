@@ -22,12 +22,17 @@ const fajr: AzureFunction = async function (
   req: HttpRequest,
 ): Promise<SalahResponse> {
   try {
+    const query = Object.keys(req.query).reduce(
+      (previousKey, currentKey) =>
+        previousKey.set(currentKey.toLowerCase(), req.query[currentKey]),
+      new Map<string, string>(),
+    )
     const date = parseIso8601Date(req.params.date)
     const latitude = parseLatitude(req.params.latitude)
     const longitude = parseLongitude(req.params.longitude)
-    const convetion = parseConvention(req.query.convention)
+    const convetion = parseConvention(query.get('convention'))
     const highLatitudeMethod = parseHighLatitudeMethod(
-      req.query.highLatitudeMethod,
+      query.get('highlatitudemethod'),
     )
     return ok(
       salah(
@@ -46,5 +51,6 @@ const fajr: AzureFunction = async function (
     return expectedError ? badRequest(expectedError) : unexpectedServerError()
   }
 }
+const b = (it: { [key: string]: string }): { [key: string]: string } => it
 
 export default fajr

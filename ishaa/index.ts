@@ -1,5 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions'
-import { getFajrDateTimeUtc } from 'salahtimes'
+import { getIshaaDateTimeUtc } from 'salahtimes'
 import { parseConvention } from '../convention'
 import { parseIso8601Date } from '../date'
 import { errorHandler } from '../errors'
@@ -13,7 +13,7 @@ import {
   badRequest,
 } from '../response'
 
-const fajr: AzureFunction = async function (
+const ishaa: AzureFunction = async function (
   context: Context,
   req: HttpRequest,
 ): Promise<SalahResponse> {
@@ -32,8 +32,8 @@ const fajr: AzureFunction = async function (
     )
     return ok(
       salah(
-        'fajr',
-        getFajrDateTimeUtc(
+        'ishaa',
+        getIshaaDateTimeUtc(
           date,
           latitude,
           longitude,
@@ -47,6 +47,5 @@ const fajr: AzureFunction = async function (
     return expectedError ? badRequest(expectedError) : unexpectedServerError()
   }
 }
-const b = (it: { [key: string]: string }): { [key: string]: string } => it
 
-export default fajr
+export default ishaa

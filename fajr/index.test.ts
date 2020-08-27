@@ -188,7 +188,6 @@ describe('fajr function', () => {
         const response = await fajr(context, request)
 
         expect(response.status).toBe(statusCode)
-        expect(response.status).toBe(statusCode)
       },
     ),
     test.each([

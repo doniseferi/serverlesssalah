@@ -3,11 +3,11 @@ import { SupportedConventions } from 'salahtimes'
 const parseConvention = (value: string): SupportedConventions =>
   !value
     ? 'MuslimWorldLeague'
-    : (function () {
+    : (() => {
         const convention = conventionsMap.get(value.toLowerCase())
         return convention
           ? convention
-          : (function () {
+          : (() => {
               throw new Error('NoSupportedConventionError')
             })()
       })()

@@ -13,11 +13,11 @@ type Salah = {
 
 const salah = (name: string, value: string): Salah =>
   !name
-    ? (function () {
+    ? (() => {
         throw new ReferenceError('name is null, undefined or an emmpty string')
       })()
     : !value
-    ? (function () {
+    ? (() => {
         throw new ReferenceError('name is null, undefined or an emmpty string')
       })()
     : { salah: name, utc: value }

@@ -5,6 +5,7 @@ import { parseIso8601Date } from '../date'
 import { errorHandler } from '../errors'
 import { parseLongitude, parseLatitude } from '../geoCoordinates'
 import { parseHighLatitudeMethod } from '../highLatitudeMethod'
+import { toLowerCase } from '../toLowerCase'
 import {
   SalahResponse,
   ok,
@@ -18,11 +19,7 @@ const ishaa: AzureFunction = async function (
   req: HttpRequest,
 ): Promise<SalahResponse> {
   try {
-    const query = Object.keys(req.query).reduce(
-      (previousKey, currentKey) =>
-        previousKey.set(currentKey.toLowerCase(), req.query[currentKey]),
-      new Map<string, string>(),
-    )
+    const query = toLowerCase(req.query)
     const date = parseIso8601Date(req.params.date)
     const latitude = parseLatitude(req.params.latitude)
     const longitude = parseLongitude(req.params.longitude)

@@ -188,7 +188,6 @@ describe('ishaa function', () => {
         const response = await ishaa(context, request)
 
         expect(response.status).toBe(statusCode)
-        expect(response.status).toBe(statusCode)
       },
     ),
     test.each([

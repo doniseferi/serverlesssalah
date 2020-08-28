@@ -1,11 +1,11 @@
-m{
+{
   "bindings": [
     {
       "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "route": "dhuhr/date/{date}/longitude/{longitude}",
+      "route": "asr/date/{date}/longitude/{longitude}",
       "methods": [
         "get"
       ]

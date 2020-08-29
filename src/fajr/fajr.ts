@@ -45,4 +45,4 @@ const fajr: AzureFunction = async function (
   }
 }
 
-export default fajr
+export { fajr }

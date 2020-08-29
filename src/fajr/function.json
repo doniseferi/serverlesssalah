@@ -1,11 +1,11 @@
-m{
+{
   "bindings": [
     {
       "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "route": "dhuhr/date/{date}/longitude/{longitude}",
+      "route": "fajr/date/{date}/latitude/{latitude}/longitude/{longitude}",
       "methods": [
         "get"
       ]
@@ -16,5 +16,6 @@ m{
       "name": "$return"
     }
   ],
-  "scriptFile": "../dist/dhuhr/index.js"
+  "entryPoint": "fajr",
+  "scriptFile": "fajr.js"
 }

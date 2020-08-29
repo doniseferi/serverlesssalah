@@ -28,4 +28,4 @@ const maghrib: AzureFunction = async function (
   }
 }
 
-export default maghrib
+export { maghrib }

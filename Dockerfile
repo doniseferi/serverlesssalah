@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/azure-functions/node:3.0-appservice
 # FROM mcr.microsoft.com/azure-functions/node:3.0
 
-ENV AzureWebJobsScriptRoot=/home/site/wwwroot \
+ENV AzureWebJobsScriptRoot=/home/site/wwwroot/dist \
     AzureFunctionsJobHost__Logging__Console__IsEnabled=true
 
 COPY . /home/site/wwwroot

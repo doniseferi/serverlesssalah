@@ -1,11 +1,9 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions'
-import { getIshaaDateTimeUtc } from 'salahtimes'
-import { parseConvention } from '../convention'
+import { getAsrDateTimeUtc } from 'salahtimes'
 import { parseIso8601Date } from '../date'
 import { errorHandler } from '../errors'
 import { parseLongitude, parseLatitude } from '../geoCoordinates'
-import { parseHighLatitudeMethod } from '../highLatitudeMethod'
-import { toLowerCase } from '../toLowerCase'
+import { parseMadhab } from '../madhab'
 import {
   SalahResponse,
   ok,
@@ -13,8 +11,9 @@ import {
   salah,
   badRequest,
 } from '../response'
+import { toLowerCase } from '../toLowerCase'
 
-const ishaa: AzureFunction = async function (
+const asr: AzureFunction = async function (
   context: Context,
   req: HttpRequest,
 ): Promise<SalahResponse> {
@@ -23,21 +22,10 @@ const ishaa: AzureFunction = async function (
     const date = parseIso8601Date(req.params.date)
     const latitude = parseLatitude(req.params.latitude)
     const longitude = parseLongitude(req.params.longitude)
-    const convetion = parseConvention(query.get('convention'))
-    const highLatitudeMethod = parseHighLatitudeMethod(
-      query.get('highlatitudemethod'),
-    )
+    const madhab = parseMadhab(query.get('madhab'))
+
     return ok(
-      salah(
-        'ishaa',
-        getIshaaDateTimeUtc(
-          date,
-          latitude,
-          longitude,
-          convetion,
-          highLatitudeMethod,
-        ),
-      ),
+      salah('asr', getAsrDateTimeUtc(date, latitude, longitude, madhab)),
     )
   } catch (e) {
     const expectedError = errorHandler(e)
@@ -45,4 +33,4 @@ const ishaa: AzureFunction = async function (
   }
 }
 
-export default ishaa
+export { asr }

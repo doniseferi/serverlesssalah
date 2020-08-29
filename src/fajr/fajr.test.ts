@@ -1,7 +1,7 @@
 import { Context } from '@azure/functions'
 import { HttpRequest } from '@azure/functions'
 import { Substitute } from '@fluffy-spoon/substitute'
-import fajr from './index'
+import { fajr } from './fajr'
 import { SalahResponse, Salah } from '../response'
 import { SalahError } from '../errors'
 

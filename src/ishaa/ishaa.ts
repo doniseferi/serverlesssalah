@@ -15,7 +15,7 @@ import {
 } from '../response'
 
 const ishaa: AzureFunction = async function (
-  context: Context,
+  _context: Context,
   req: HttpRequest,
 ): Promise<SalahResponse> {
   try {

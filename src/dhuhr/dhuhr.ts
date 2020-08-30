@@ -12,7 +12,7 @@ import {
 } from '../response'
 
 const dhuhr: AzureFunction = async function (
-  context: Context,
+  _context: Context,
   req: HttpRequest,
 ): Promise<SalahResponse> {
   try {

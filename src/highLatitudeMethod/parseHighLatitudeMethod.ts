@@ -1,6 +1,8 @@
 import { HighLatitudeMethod } from 'salahtimes'
 
-const parseHighLatitudeMethod = (value: string): HighLatitudeMethod =>
+const parseHighLatitudeMethod = (
+  value: string | undefined,
+): HighLatitudeMethod =>
   !value
     ? 'AngleBasedMethod'
     : (() => {

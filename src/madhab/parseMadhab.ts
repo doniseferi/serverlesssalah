@@ -1,6 +1,6 @@
 import { Madhab } from 'salahtimes'
 
-const parseMadhab = (value: string): Madhab =>
+const parseMadhab = (value: string | undefined): Madhab =>
   !value
     ? 'Standard'
     : (() => {

@@ -1,7 +1,10 @@
 import { salahError, SalahError } from './'
 
 const errorHandler = (error: Error): SalahError =>
-  handlers.find((err) => err.name === error.message)?.error
+  handlers.find((err) => err.name === error.message)?.error ?? unexpectedError()
+
+const unexpectedError = (): SalahError =>
+  salahError('An unexpected error has occured. Please try again.', '__none__')
 
 const handlers = [
   {

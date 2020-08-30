@@ -1,6 +1,6 @@
 import { SupportedConventions } from 'salahtimes'
 
-const parseConvention = (value: string): SupportedConventions =>
+const parseConvention = (value: string | undefined): SupportedConventions =>
   !value
     ? 'MuslimWorldLeague'
     : (() => {

@@ -44,15 +44,17 @@ const badRequest = (error: SalahError): SalahResponse =>
         body: error,
       }
 
-const unexpectedServerError = (): SalahResponse => ({
+const unexpectedServerError = (
+  error: SalahError = salahError(
+    'An unexpected error has occured. Please try again.',
+    '__none__',
+  ),
+): SalahResponse => ({
   headers: {
     'Content-Type': 'application/json',
   },
   status: 500,
-  body: salahError(
-    'An unexpected error has occured. Please try again.',
-    '__none__',
-  ),
+  body: error,
 })
 
 export { SalahResponse, Salah, salah, ok, badRequest, unexpectedServerError }

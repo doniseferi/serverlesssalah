@@ -4,11 +4,10 @@
   "description": "A serverless http triggered application to get the exact date and time in an ISO 8601 format for any of the five daily prayers at any location and date.",
   "scripts": {
     "build:production": "npm run prestart && npm prune -- production",
-    "copy-to-dist": "copyfiles --up 1 \"src/**/*.json\" dist && copyfiles package.json package-lock.json dist",
+    "copy-to-dist": "copyfiles -e \"src/local.settings.json\" --up 1 \"src/**/*.json\" dist && copyfiles package.json package-lock.json dist",
     "build": "npm run clean && tsc && npm run copy-to-dist",
     "watch": "tsc --w",
-    "build:docker": "docker build --tag doniseferi/serverlesssalah:latest.test .",
-    "run:docker": "docker-compose up --remove-orphans",
+    "compose": "docker-compose up --remove-orphans",
     "prestart": "npm run build",
     "start:host": "func start",
     "start": "cd dist && func extensions install && npm run start:host watch",

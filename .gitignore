@@ -94,3 +94,6 @@ appsettings.json
 local.settings.json
 
 .vscode
+
+e2e/**/*.json
+!e2e/**/host.json

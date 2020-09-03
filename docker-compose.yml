@@ -1,0 +1,12 @@
+version: '3'
+services:
+  func:
+    build: .
+    environment:
+      AzureFunctionsJobHost__Logging__Console__IsEnabled: 'true'
+      AzureWebJobsSecretStorageType: 'files'
+    ports:
+      - 7071:80
+    restart: always
+    volumes:
+      - ./e2e/test/keys:/azure-functions-host/Secrets

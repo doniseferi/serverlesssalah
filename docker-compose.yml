@@ -9,4 +9,4 @@ services:
       - 7071:80
     restart: always
     volumes:
-      - ./e2e/test/keys:/azure-functions-host/Secrets
+      - ./e2e/keys:/azure-functions-host/Secrets

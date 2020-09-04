@@ -2,7 +2,7 @@ import { Salah } from '../../src/response'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { SalahError } from '../../src/errors'
 
-describe('ishaa function', () => {
+describe('fajr function', () => {
   test.each([
     ['2020-06-08', 200],
     ['20200608', 200],
@@ -26,7 +26,7 @@ describe('ishaa function', () => {
   ])(`requires an iso 8601 date in the path`, async (date, statusCode) => {
     await axios
       .get(
-        `http://localhost:7071/api/ishaa/date/${date}/latitude/0/longitude/0?code=test`,
+        `http://localhost:7071/api/fajr/date/${date}/latitude/0/longitude/0?code=test`,
       )
       .then((response: AxiosResponse<Salah>) => {
         expect(response.status).toEqual(statusCode)
@@ -57,7 +57,7 @@ describe('ishaa function', () => {
       async (longitude, statusCode) => {
         await axios
           .get(
-            `http://localhost:7071/api/ishaa/date/2020-01-01/latitude/0/longitude/${longitude}?code=test`,
+            `http://localhost:7071/api/fajr/date/2020-01-01/latitude/0/longitude/${longitude}?code=test`,
           )
           .then((response: AxiosResponse<Salah>) => {
             expect(response.status).toEqual(statusCode)
@@ -89,7 +89,7 @@ describe('ishaa function', () => {
       async (latitude, statusCode) => {
         await axios
           .get(
-            `http://localhost:7071/api/ishaa/date/2020-01-01/latitude/${latitude}/longitude/0?code=test`,
+            `http://localhost:7071/api/fajr/date/2020-01-01/latitude/${latitude}/longitude/0?code=test`,
           )
           .then((response: AxiosResponse<Salah>) => {
             expect(response.status).toEqual(statusCode)
@@ -102,29 +102,29 @@ describe('ishaa function', () => {
     test('Returns a date time in iso 8601 format string in the body', async () => {
       await axios
         .get(
-          'http://localhost:7071/api/ishaa/date/2025-01-18/latitude/0/longitude/-0.01015?code=test',
+          'http://localhost:7071/api/fajr/date/2025-01-18/latitude/0/longitude/-0.01015?code=test',
         )
         .then((response: AxiosResponse<Salah>) => {
-          expect(response.data.utc).toEqual('2025-01-18T19:23:13.116Z')
-          expect(response.data.salah).toEqual('ishaa')
+          expect(response.data.utc).toEqual('2025-01-18T04:53:10.110Z')
+          expect(response.data.salah).toEqual('fajr')
         })
     }),
     test('Returns a valid error response on consecutive error calls', async () => {
       await axios
         .get(
-          'http://localhost:7071/api/ishaa/date/2025-01-18/latitude/0/longitude/-400.01015?code=test',
+          'http://localhost:7071/api/fajr/date/2025-01-18/latitude/0/longitude/-400.01015?code=test',
         )
         .catch(async () => {
           await axios
             .get(
-              'http://localhost:7071/api/ishaa/date/2025-01-18/latitude/0/longitude/-400.01015?code=test',
+              'http://localhost:7071/api/fajr/date/2025-01-18/latitude/0/longitude/-400.01015?code=test',
             )
             .catch((e: AxiosError<SalahError>) => {
               const error = e.response?.data
               expect(e.response?.status).toEqual(400)
               expect(error?.field).toEqual('longitude')
               expect(error?.message).toEqual(
-                'Please provide a longitude value within a range of -180 to 180. Heres an example path: /api/dhuhr/date/2020-09-03/longitude/-0.174943',
+                'Please provide a longitude value within a range of -180 to 180. Heres an example path: /api/dhuhr/date/2020-09-04/longitude/-0.174943',
               )
             })
         })
@@ -145,7 +145,7 @@ describe('ishaa function', () => {
       async (convention, statusCode: number) => {
         await axios
           .get(
-            `http://localhost:7071/api/ishaa/date/2037-08-02/latitude/0/longitude/0?convention=${convention}&code=test`,
+            `http://localhost:7071/api/fajr/date/2037-08-02/latitude/0/longitude/0?convention=${convention}&code=test`,
           )
           .then((response: AxiosResponse<Salah>) => {
             expect(response.status).toEqual(statusCode)
@@ -167,7 +167,7 @@ describe('ishaa function', () => {
       async (highLatitudeMethod, statusCode: number) => {
         await axios
           .get(
-            `http://localhost:7071/api/ishaa/date/2037-08-02/latitude/0/longitude/0?convention=MuslimWorldLeague&highLatitudeMethod=${highLatitudeMethod}&code=test`,
+            `http://localhost:7071/api/fajr/date/2037-08-02/latitude/0/longitude/0?convention=MuslimWorldLeague&highLatitudeMethod=${highLatitudeMethod}&code=test`,
           )
           .then((response: AxiosResponse<Salah>) => {
             expect(response.status).toEqual(statusCode)

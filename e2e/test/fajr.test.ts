@@ -124,7 +124,7 @@ describe('fajr function', () => {
               expect(e.response?.status).toEqual(400)
               expect(error?.field).toEqual('longitude')
               expect(error?.message).toEqual(
-                'Please provide a longitude value within a range of -180 to 180. Heres an example path: /api/dhuhr/date/2020-09-03/longitude/-0.174943',
+                'Please provide a longitude value within a range of -180 to 180. Heres an example path: /api/dhuhr/date/2020-09-04/longitude/-0.174943',
               )
             })
         })

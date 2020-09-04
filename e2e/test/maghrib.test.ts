@@ -1,6 +1,4 @@
-import { Salah } from '../../src/response/'
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { SalahError } from '../../src/errors'
 
 describe('maghrib function', () => {
   test.each([
@@ -28,10 +26,10 @@ describe('maghrib function', () => {
       .get(
         `http://localhost:7071/api/maghrib/date/${date}/latitude/0/longitude/0?code=test`,
       )
-      .then((response: AxiosResponse<Salah>) => {
+      .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
         expect(response.status).toEqual(statusCode)
       })
-      .catch((e: AxiosError<SalahError>) => {
+      .catch((e: AxiosError) => {
         expect(e.response?.status).toEqual(statusCode)
       })
   }),
@@ -59,10 +57,10 @@ describe('maghrib function', () => {
           .get(
             `http://localhost:7071/api/maghrib/date/2020-01-01/latitude/0/longitude/${longitude}?code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },
@@ -91,10 +89,10 @@ describe('maghrib function', () => {
           .get(
             `http://localhost:7071/api/maghrib/date/2020-01-01/latitude/${latitude}/longitude/0?code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },
@@ -104,7 +102,7 @@ describe('maghrib function', () => {
         .get(
           'http://localhost:7071/api/maghrib/date/2025-01-18/latitude/0/longitude/-0.01015?code=test',
         )
-        .then((response: AxiosResponse<Salah>) => {
+        .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
           expect(response.data.utc).toEqual('2025-01-18T18:16:54.711Z')
           expect(response.data.salah).toEqual('maghrib')
         })
@@ -119,7 +117,7 @@ describe('maghrib function', () => {
             .get(
               'http://localhost:7071/api/maghrib/date/2025-01-18/latitude/0/longitude/-400.01015?code=test',
             )
-            .catch((e: AxiosError<SalahError>) => {
+            .catch((e: AxiosError<{ field: string; message: string }>) => {
               const error = e.response?.data
               expect(e.response?.status).toEqual(400)
               expect(error?.field).toEqual('longitude')

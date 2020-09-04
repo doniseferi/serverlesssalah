@@ -1,6 +1,4 @@
-import { Salah } from '../../src/response/'
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { SalahError } from '../../src/errors'
 
 describe('dhuhr function', () => {
   test.each([
@@ -26,10 +24,10 @@ describe('dhuhr function', () => {
   ])(`requires an iso 8601 date in the path`, async (date, statusCode) => {
     await axios
       .get(`http://localhost:7071/api/dhuhr/date/${date}/longitude/0?code=test`)
-      .then((response: AxiosResponse<Salah>) => {
+      .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
         expect(response.status).toEqual(statusCode)
       })
-      .catch((e: AxiosError<SalahError>) => {
+      .catch((e: AxiosError) => {
         expect(e.response?.status).toEqual(statusCode)
       })
   }),
@@ -57,10 +55,10 @@ describe('dhuhr function', () => {
           .get(
             `http://localhost:7071/api/dhuhr/date/2020-01-01/longitude/${longitude}?code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },
@@ -70,7 +68,7 @@ describe('dhuhr function', () => {
         .get(
           'http://localhost:7071/api/dhuhr/date/2025-01-18/longitude/-0.01015?code=test',
         )
-        .then((response: AxiosResponse<Salah>) => {
+        .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
           expect(response.data.utc).toEqual('2025-01-18T12:10:20.853Z')
           expect(response.data.salah).toEqual('dhuhr')
         })
@@ -85,7 +83,7 @@ describe('dhuhr function', () => {
           .get(
             'http://localhost:7071/api/dhuhr/date/2025-01-18/longitude/-400.01015?code=test',
           )
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError<{ field: string; message: string }>) => {
             const error = e.response?.data
             expect(e.response?.status).toEqual(400)
             expect(error?.field).toEqual('longitude')

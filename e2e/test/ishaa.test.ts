@@ -1,6 +1,4 @@
-import { Salah } from '../../src/response'
 import axios, { AxiosError, AxiosResponse } from 'axios'
-import { SalahError } from '../../src/errors'
 
 describe('fajr function', () => {
   test.each([
@@ -28,10 +26,10 @@ describe('fajr function', () => {
       .get(
         `http://localhost:7071/api/fajr/date/${date}/latitude/0/longitude/0?code=test`,
       )
-      .then((response: AxiosResponse<Salah>) => {
+      .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
         expect(response.status).toEqual(statusCode)
       })
-      .catch((e: AxiosError<SalahError>) => {
+      .catch((e: AxiosError) => {
         expect(e.response?.status).toEqual(statusCode)
       })
   }),
@@ -59,10 +57,10 @@ describe('fajr function', () => {
           .get(
             `http://localhost:7071/api/fajr/date/2020-01-01/latitude/0/longitude/${longitude}?code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },
@@ -91,10 +89,10 @@ describe('fajr function', () => {
           .get(
             `http://localhost:7071/api/fajr/date/2020-01-01/latitude/${latitude}/longitude/0?code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },
@@ -104,7 +102,7 @@ describe('fajr function', () => {
         .get(
           'http://localhost:7071/api/fajr/date/2025-01-18/latitude/0/longitude/-0.01015?code=test',
         )
-        .then((response: AxiosResponse<Salah>) => {
+        .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
           expect(response.data.utc).toEqual('2025-01-18T04:53:10.110Z')
           expect(response.data.salah).toEqual('fajr')
         })
@@ -119,7 +117,7 @@ describe('fajr function', () => {
             .get(
               'http://localhost:7071/api/fajr/date/2025-01-18/latitude/0/longitude/-400.01015?code=test',
             )
-            .catch((e: AxiosError<SalahError>) => {
+            .catch((e: AxiosError<{ field: string; message: string }>) => {
               const error = e.response?.data
               expect(e.response?.status).toEqual(400)
               expect(error?.field).toEqual('longitude')
@@ -147,10 +145,10 @@ describe('fajr function', () => {
           .get(
             `http://localhost:7071/api/fajr/date/2037-08-02/latitude/0/longitude/0?convention=${convention}&code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },
@@ -169,10 +167,10 @@ describe('fajr function', () => {
           .get(
             `http://localhost:7071/api/fajr/date/2037-08-02/latitude/0/longitude/0?convention=MuslimWorldLeague&highLatitudeMethod=${highLatitudeMethod}&code=test`,
           )
-          .then((response: AxiosResponse<Salah>) => {
+          .then((response: AxiosResponse<{ utc: string; salah: string }>) => {
             expect(response.status).toEqual(statusCode)
           })
-          .catch((e: AxiosError<SalahError>) => {
+          .catch((e: AxiosError) => {
             expect(e.response?.status).toEqual(statusCode)
           })
       },

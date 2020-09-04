@@ -3,19 +3,18 @@
   "version": "1.0.0",
   "description": "A serverless http triggered application to get the exact date and time in an ISO 8601 format for any of the five daily prayers at any location and date.",
   "scripts": {
-    "build:production": "npm run prestart && npm prune -- production",
+    "test": "npm run compose && npm run jest-test",
     "copy-to-dist": "copyfiles -e \"src/local.settings.json\" --up 1 \"src/**/*.json\" dist && copyfiles package.json package-lock.json dist",
     "build": "npm run clean && tsc && npm run copy-to-dist",
     "watch": "tsc --w",
-    "compose": "docker-compose up --remove-orphans",
+    "compose": "docker-compose up -d --remove-orphans",
     "prestart": "npm run build",
     "start:host": "func start",
     "start": "cd dist && func extensions install && npm run start:host watch",
     "lint": "eslint . --ext .ts --fix",
     "pretty": "prettier --config .prettierrc.json --write \"./**/*.{js,ts,json,md}\"",
     "clean": "npm install && rimraf dist",
-    "test": "jest --testRegex \"\\.test\\.ts$\"",
-    "test-save-results": "cross-env JEST_JUNIT_OUTPUT=test-results/test-results-local.xml jest --ci --runInBand --reporters=default --reporters=jest-junit --testRegex \"\\.test\\.ts$\""
+    "jest-test": "jest --testRegex \"\\.test\\.ts$\""
   },
   "repository": {
     "type": "git",
@@ -32,6 +31,7 @@
     "@types/jest": "^26.0.9",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
+    "axios": "^0.20.0",
     "copyfiles": "^2.3.0",
     "eslint": "^7.6.0",
     "eslint-config-prettier": "^6.11.0",

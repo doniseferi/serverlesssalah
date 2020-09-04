@@ -80,13 +80,19 @@ describe('dhuhr function', () => {
       .get(
         'http://localhost:7071/api/dhuhr/date/2025-01-18/longitude/-400.01015?code=test',
       )
-      .catch((e: AxiosError<SalahError>) => {
-        const error = e.response?.data
-        expect(e.response?.status).toEqual(400)
-        expect(error?.field).toEqual('longitude')
-        expect(error?.message).toEqual(
-          'Please provide a longitude value within a range of -180 to 180. Heres an example path: /api/dhuhr/date/2020-09-03/longitude/-0.174943',
-        )
+      .catch(async () => {
+        await axios
+          .get(
+            'http://localhost:7071/api/dhuhr/date/2025-01-18/longitude/-400.01015?code=test',
+          )
+          .catch((e: AxiosError<SalahError>) => {
+            const error = e.response?.data
+            expect(e.response?.status).toEqual(400)
+            expect(error?.field).toEqual('longitude')
+            expect(error?.message).toEqual(
+              'Please provide a longitude value within a range of -180 to 180. Heres an example path: /api/dhuhr/date/2020-09-03/longitude/-0.174943',
+            )
+          })
       })
   })
 })

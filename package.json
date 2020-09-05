@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "A serverless http triggered application to get the exact date and time in an ISO 8601 format for any of the five daily prayers at any location and date.",
   "scripts": {
-    "test": "npm run compose && npm run jest-test",
+    "test": "npm run build && npm run compose && npm run jest-test",
     "copy-to-dist": "copyfiles -e \"src/local.settings.json\" --up 1 \"src/**/*.json\" dist && copyfiles package.json package-lock.json dist",
     "build": "npm run clean && tsc && npm run copy-to-dist",
     "watch": "tsc --w",
-    "compose": "docker-compose up -d --remove-orphans",
+    "compose": "npm run build && docker-compose build && docker-compose up -d --remove-orphans",
     "prestart": "npm run build",
     "start:host": "func start",
     "start": "cd dist && func extensions install && npm run start:host watch",

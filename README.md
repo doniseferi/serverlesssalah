@@ -1,6 +1,6 @@
 # serverlesssalah
 
-1. [purpose](#purpose)
+1. [Purpose](#purpose)
 2. [Prerequisites](#prerequisites)
 3. [Authentication Notes](#authnotes)
 4. [Endpoints](#endpoints)

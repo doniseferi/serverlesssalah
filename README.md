@@ -1,7 +1,7 @@
 # serverlesssalah
 
 <p align="center" background-color="white">
-<img src="./serverlesssalah.svg?sanitize=true" width="300" />
+<img src="https://raw.githubusercontent.com/doniseferi/serverlesssalah/d434e571ff3a919f98489988ec3dc224f36a7d26/serverlesssalah.svg" width="300" />
 </p>
 
 [![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md)

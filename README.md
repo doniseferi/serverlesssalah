@@ -1,5 +1,15 @@
 # serverlesssalah
 
+<p align="center" background-color="white">
+<img src="./serverlesssalah.svg?sanitize=true" width="300" />
+</p>
+
+[![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/doniseferi/serverlesssalah?style=plastic)
+![GitHub last commit](https://img.shields.io/github/last-commit/doniseferi/serverlesssalah)
+
+---
+
 1. [Purpose](#purpose)
 2. [Prerequisites](#prerequisites)
 3. [Authentication Notes](#authnotes)

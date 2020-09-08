@@ -1,5 +1,5 @@
 {
-  "name": "severlesssalah",
+  "name": "serverlesssalah",
   "version": "1.0.0",
   "description": "A serverless http triggered application to get the exact date and time in an ISO 8601 format for any of the five daily prayers at any location and date.",
   "scripts": {

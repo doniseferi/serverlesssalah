@@ -142,4 +142,4 @@ Example:
 
 ---
 
-**_and as always, thanks for lookin_** - _Edonis_ 😊
+**_and as always, thanks for lookin'_** - _Edonis_ 😊

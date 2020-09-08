@@ -7,6 +7,7 @@
     "copy-to-dist": "copyfiles -e \"src/local.settings.json\" --up 1 \"src/**/*.json\" dist && copyfiles package.json package-lock.json dist",
     "build": "npm run clean && tsc && npm run copy-to-dist",
     "watch": "tsc --w",
+    "build:docker": "docker build --tag doniseferi/serverlesssalah:latest .",
     "compose": "npm run build && docker-compose build && docker-compose up -d --remove-orphans",
     "prestart": "npm run build",
     "start:host": "func start",

@@ -5,8 +5,7 @@
 </p>
 
 [![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md)
-![Docker Image Version (latest by date)](https://img.shields.io/docker/v/doniseferi/serverlesssalah?style=plastic)
-![GitHub last commit](https://img.shields.io/github/last-commit/doniseferi/serverlesssalah)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/doniseferi/serverlesssalah?style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/doniseferi/serverlesssalah)
 
 ---
 

@@ -40,7 +40,7 @@ All functions in this project have an authentication level of type '_function_' 
 
 > When running functions locally, authorization is disabled regardless of the specified authorization level setting. After publishing to Azure, the authLevel setting in your trigger is enforced. Keys are still required when running locally in a container.
 
-To overcome the constraint of having to publish to Azure for authentication functionality, this project includes a [host.json](./e2e/keys/host.json) file that defines a key with a value of '_test_' for the purpose of testing. All requests must provide.
+To overcome the constraint of having to publish to Azure for authentication functionality, this project includes a [host.json](./e2e/keys/host.json) file that defines a key with a value of '_test_' for the purpose of testing, this must be provided on all requests for authentication otherwise the response will be of status code 401. 
 
 ### Example Requests:
 
@@ -110,7 +110,7 @@ Example:
 
 `/api/asr/date/2025-01-18/latitude/51.515059/longitude/-0.191380.01015?madhab=Hanafi&code=test`
 
-### <a name="maghrib">\*\*Maghrib
+### <a name="maghrib">**Maghrib**
 
 Http Method: **GET**
 

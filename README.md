@@ -1,7 +1,7 @@
 # serverlesssalah
 
 <p align="center" background-color="white">
-<img src="https://raw.githubusercontent.com/doniseferi/serverlesssalah/25419819860f97fae42fc78913ea09d9202a2696/serverlesssalah.svg" width="300" />
+<img src="https://raw.githubusercontent.com/doniseferi/serverlesssalah/25419819860f97fae42fc78913ea09d9202a2696/serverlesssalah.svg" width="400px" />
 </p>
 
 [![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md)
@@ -40,7 +40,7 @@ All functions in this project have an authentication level of type '_function_' 
 
 > When running functions locally, authorization is disabled regardless of the specified authorization level setting. After publishing to Azure, the authLevel setting in your trigger is enforced. Keys are still required when running locally in a container.
 
-To overcome the constraint of having to publish to Azure for authentication functionality, this project includes a [host.json](./e2e/keys/host.json) file that defines a key with a value of '_test_' for the purpose of testing, this must be provided on all requests for authentication otherwise the response will be of status code 401. 
+To overcome the constraint of having to publish to Azure for authentication functionality, this project includes a [host.json](./e2e/keys/host.json) file that defines a key with a value of '_test_' for the purpose of testing, this must be provided on all requests for authentication otherwise the response will be of status code 401.
 
 ### Example Requests:
 

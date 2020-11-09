@@ -4,8 +4,7 @@
 <img src="https://raw.githubusercontent.com/doniseferi/serverlesssalah/25419819860f97fae42fc78913ea09d9202a2696/serverlesssalah.svg" width="400px" />
 </p>
 
-[![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md)
-![Docker Image Version (latest by date)](https://img.shields.io/docker/v/doniseferi/serverlesssalah?style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/doniseferi/serverlesssalah)
+[![Build Status](https://travis-ci.com/doniseferi/serverlesssalah.svg?branch=master)](https://travis-ci.com/doniseferi/serverlesssalah) [![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/bbad261b293b489e9cacb8d79bbd7f3f)](https://www.codacy.com/gh/doniseferi/serverlesssalah/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=doniseferi/serverlesssalah&amp;utm_campaign=Badge_Grade) ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/doniseferi/serverlesssalah?style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/doniseferi/serverlesssalah)
 
 ---
 

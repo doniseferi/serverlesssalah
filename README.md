@@ -4,6 +4,7 @@
 <img src="https://raw.githubusercontent.com/doniseferi/serverlesssalah/25419819860f97fae42fc78913ea09d9202a2696/serverlesssalah.svg" width="400px" />
 </p>
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/198b48bc85e44ff0b7860857ac78f902)](https://app.codacy.com/gh/doniseferi/serverlesssalah?utm_source=github.com&utm_medium=referral&utm_content=doniseferi/serverlesssalah&utm_campaign=Badge_Grade)
 [![GitHub license](https://img.shields.io/github/license/doniseferi/serverlesssalah)](https://github.com/doniseferi/serverlesssalah/blob/master/LICENCE.md)
 ![Docker Image Version (latest by date)](https://img.shields.io/docker/v/doniseferi/serverlesssalah?style=plastic) ![GitHub last commit](https://img.shields.io/github/last-commit/doniseferi/serverlesssalah)
 
